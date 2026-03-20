@@ -1,9 +1,10 @@
 :root {
-    --primary-color: #B8860B; /* Main Gold */
-    --accent-color: #FF8BA7; /* Rose Pink accents */
+    --primary-color: #B8860B; /* Deep Gold */
+    --accent-color: #FF8BA7; /* Rose Pink for accents */
     --text-color: #5C4033; /* Dark Coffee */
     --bg-cream: #FFFAF0; /* Floral Cream */
     --gold-silk: linear-gradient(135deg, #FFDF91 0%, #FFF9E9 100%);
+    --card-shadow: 0 10px 30px rgba(184,134,11,0.15);
 }
 
 * {
@@ -22,9 +23,9 @@ body {
     width: 100vw;
 }
 
-.telugu-font, .telugu-title, .ceremony-label, .vatu-hero-name, .venue-hero-name, .traditional-text p {
+.telugu-font, .telugu-title, .telugu-main-title, .ceremony-headline, .vatu-hero-name, .venue-hero-name, .traditional-text p {
     font-family: 'Mandali', sans-serif;
-    line-height: 2.2;
+    line-height: 2;
     letter-spacing: 0.8px;
     text-shadow: 0 0 1px rgba(0,0,0,0.1);
 }
@@ -36,7 +37,7 @@ body {
     overflow: hidden;
 }
 
-/* Landing Overlay */
+/* Landing Screen */
 .landing-overlay {
     position: fixed;
     inset: 0;
@@ -49,16 +50,12 @@ body {
     transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.8s ease;
 }
 
-.landing-overlay.hidden {
-    transform: translateY(-100%);
-    opacity: 0;
-    pointer-events: none;
-}
+.landing-overlay.hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 
 .landing-ganesha {
     width: 150px;
-    margin-bottom: 2rem;
     animation: floatGanesha 4s ease-in-out infinite;
+    margin-bottom: 2rem;
 }
 
 @keyframes floatGanesha {
@@ -75,16 +72,16 @@ body {
     border-radius: 40px;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
-    animation: pulseBtn 2s infinite;
+    animation: pulseButton 2s infinite;
 }
 
-@keyframes pulseBtn {
+@keyframes pulseButton {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
 
-/* Story Cinematic Slides */
+/* Slide Styles */
 .story-container {
     height: 100dvh;
     width: 100vw;
@@ -107,33 +104,55 @@ body {
     padding: 2.5rem;
 }
 
-.slide::after {
-    content: '';
-    position: absolute;
-    inset: 20px;
-    border: 1px solid rgba(184, 134, 11, 0.1);
-    pointer-events: none;
-    z-index: 50;
-}
-
 .content-frame {
     z-index: 10;
     width: 100%;
     text-align: center;
 }
 
-/* Unified Premium Background logic for Slide 2 and 4 */
-.mobile-vatu-bg {
+/* Slide 1 - Enhanced Titles */
+.telugu-main-title {
+    font-size: 2.8rem;
+    font-family: 'Gidugu', serif;
+    color: var(--primary-color);
+    margin-top: 1rem;
+}
+
+.ceremony-headline {
+    font-family: 'Gidugu', serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #8B4513; 
+    line-height: 1.1;
+    text-shadow: 2px 2px 0px rgba(184, 134, 11, 0.2);
+    margin: 1.5rem 0;
+}
+
+.subtitle-en { font-style: italic; color: #888; font-size: 0.9rem; letter-spacing: 2px; }
+
+/* Slide 2 - Real Photo Hero */
+.parallax-wrapper {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    opacity: 0.15;
-    filter: sepia(0.2);
+    inset: 0;
     z-index: 1;
+}
+
+.vatu-hero-photo {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 90%;
+    object-fit: contain;
+    opacity: 0.25; /* Blended with background */
+    filter: sepia(0.2);
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+    animation: zoomReveal 2s ease-out;
+}
+
+@keyframes zoomReveal {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 0.25; }
 }
 
 .vatu-hero-name, .venue-hero-name {
@@ -144,116 +163,68 @@ body {
     border-bottom: 4px double var(--primary-color);
     display: inline-block;
     padding-bottom: 5px;
+    background: linear-gradient(to right, #8B4513, #B8860B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.venue-hero-name {
-    font-size: 2.2rem; /* Adjusted for longer Telugu names */
-    line-height: 1.4;
+/* Venue Backgrounds */
+.mobile-vatu-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; height: 100%; object-fit: contain; opacity: 0.15; z-index: 1;
 }
 
-.venue-header { font-size: 1.1rem; letter-spacing: 5px; color: var(--primary-color); font-weight: 700; margin-bottom: 1rem; }
-.venue-divider { width: 50px; height: 1px; background: var(--primary-color); margin: 0.5rem auto 1.5rem; opacity: 0.5; }
-
-.direction-btn {
-    display: inline-block;
-    margin: 2rem 0;
-    padding: 12px 35px;
-    background: var(--gold-silk);
-    border: 1px solid var(--primary-color);
-    color: var(--text-color);
-    font-weight: 700;
-    border-radius: 10px;
-    text-decoration: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.invite-msg { font-size: 1rem; color: #888; font-style: italic; margin-top: 1.5rem; }
-
-/* Slide 3 Layout */
 .date-hero-card {
     background: var(--gold-silk);
     padding: 2rem 1rem;
     border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(184, 134, 11, 0.15);
+    box-shadow: var(--card-shadow);
     margin: 2.5rem 0;
 }
 
-.d-text { font-size: 2.2rem; font-weight: bold; color: #FF8B45; }
+.d-text { font-size: 2.4rem; font-weight: bold; color: #FF8B45; }
 
 /* Flower Particles */
 .flower-vfx {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1000;
-    overflow: hidden;
+    position: fixed; inset: 0; pointer-events: none; z-index: 1000; overflow: hidden;
 }
 
 .petal {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 10px 0 10px 0;
-    animation: petalFalling 10s linear infinite;
-    opacity: 0.6;
+    position: absolute; width: 20px; height: 20px; border-radius: 10px 0 10px 0;
+    animation: petalFall 12s linear infinite; opacity: 0.6;
 }
 
-@keyframes petalFalling {
+@keyframes petalFall {
     0% { transform: translateY(-10vh) rotate(0); opacity: 0; }
     10% { opacity: 0.8; }
-    100% { transform: translateY(110vh) rotate(720deg) translateX(80px); opacity: 0; }
+    100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
 }
 
-/* Dots Tracking */
+/* Dots & Controls */
 .story-dots {
-    position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    z-index: 500;
+    position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 15px; z-index: 500;
 }
 
 .story-dot { width: 4px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 50%; transition: 0.4s; }
 .story-dot.active { border-radius: 10px; height: 30px; background: var(--primary-color); }
 
-/* Fade & Entrance */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.slide.active .fade-in {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.active .venue-hero-name {
-    animation: zoomReveal 1s ease-out forwards;
-}
-
-@keyframes zoomReveal {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-/* Audio Settings */
 .audio-control {
-    position: fixed;
-    top: 25px;
-    right: 25px;
-    z-index: 5000;
-    background: rgba(255, 255, 255, 0.9);
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    position: fixed; top: 25px; right: 25px; z-index: 5000;
+    background: rgba(255, 255, 255, 0.9); width: 45px; height: 45px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.fade-in { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.slide.active .fade-in { opacity: 1; transform: translateY(0); }
+
+.direction-btn {
+    display: inline-block; margin: 1.5rem 0; padding: 12px 35px;
+    background: var(--gold-silk); border: 1px solid var(--primary-color);
+    color: var(--text-color); font-weight: 700; border-radius: 10px; text-decoration: none;
 }
 
 ::-webkit-scrollbar { display: none; }
