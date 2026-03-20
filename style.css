@@ -126,25 +126,25 @@ body {
     justify-content: center;
     backface-visibility: hidden;
     transform-origin: left center;
-    transition: transform 1s cubic-bezier(0.6, 0.05, 0.28, 0.91), z-index 0s;
+    transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1), z-index 0s, box-shadow 0.8s;
     overflow: hidden;
     z-index: 1;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
 
-/* Page Texture Overlay */
+/* Page Texture & Binding Shadow */
 .slide::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 5%, rgba(0,0,0,0) 95%, rgba(0,0,0,0.02) 100%);
+    background: linear-gradient(to right, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.02) 4%, rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, rgba(0,0,0,0.05) 100%);
     pointer-events: none;
     z-index: 10;
 }
 
 .slide::after { 
     content: ''; position: absolute; inset: 15px; 
-    border: 1px solid rgba(184, 134, 11, 0.15); 
+    border: 1px solid rgba(184, 134, 11, 0.2); 
     pointer-events: none; z-index: 50; 
 }
 
@@ -153,6 +153,7 @@ body {
     transform: rotateY(-180deg);
     pointer-events: none;
     z-index: 0 !important;
+    box-shadow: 15px 0 50px rgba(0,0,0,0.3); /* Stronger shadow during flip */
 }
 
 .slide.active {

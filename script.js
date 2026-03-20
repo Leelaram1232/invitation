@@ -96,30 +96,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     storyWindow.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
+        handleSwipe(e);
     }, {passive: true});
 
-    const handleSwipe = () => {
+    const handleSwipe = (e) => {
         const threshold = 50;
-        if (touchStartX - touchEndX > threshold) {
-            navigate('next'); // Swipe Left -> Next
-        } else if (touchEndX - touchStartX > threshold) {
-            navigate('prev'); // Swipe Right -> Prev
+        const deltaX = touchStartX - touchEndX;
+        if (Math.abs(deltaX) > threshold) {
+            if (deltaX > 0) navigate('next'); // Swipe Left -> Forward
+            else navigate('prev'); // Swipe Right -> Backward
         }
     };
 
-    // Click on slide to advance (optional but helpful)
-    slides.forEach((slide, index) => {
-        slide.addEventListener('click', (e) => {
-            // Prevent flip if clicking a link/button or its children
-            if (e.target.closest('a') || e.target.closest('button')) return;
-            if (index === currentSlide) navigate('next');
-        });
+    // Edge Tap Navigation (Like Instagram/E-readers)
+    storyWindow.addEventListener('click', (e) => {
+        if (e.target.closest('a') || e.target.closest('button') || e.target.closest('.story-dot')) return;
+        
+        const width = window.innerWidth;
+        const x = e.clientX;
+        
+        if (x < width * 0.3) {
+            navigate('prev');
+        } else {
+            navigate('next');
+        }
     });
 
-    // Dot click navigation
+    // Dot navigation
     dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
+        dot.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent trigger storyWindow click
             currentSlide = index;
             updateSlides();
         });
