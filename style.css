@@ -1,10 +1,9 @@
 :root {
     --primary-color: #B8860B; /* Deep Gold */
-    --accent-color: #FF8BA7; /* Rose Pink for accents */
-    --text-color: #5C4033; /* Dark Coffee */
+    --accent-color: #FF8BA7; /* Rose Pink accents */
+    --text-color: #4B3621; /* Darker Coffee for more contrast */
     --bg-cream: #FFFAF0; /* Floral Cream */
     --gold-silk: linear-gradient(135deg, #FFDF91 0%, #FFF9E9 100%);
-    --card-shadow: 0 10px 30px rgba(184,134,11,0.15);
 }
 
 * {
@@ -23,11 +22,13 @@ body {
     width: 100vw;
 }
 
-.telugu-font, .telugu-title, .telugu-main-title, .ceremony-headline, .vatu-hero-name, .venue-hero-name, .traditional-text p {
+/* GLOBAL TELUGU VISIBILITY ENHANCEMENTS */
+.telugu-font, .telugu-title, .telugu-main-title, .ceremony-headline, .vatu-hero-name, .venue-hero-name, .traditional-text p, .host-name, .welcomers-list p {
     font-family: 'Mandali', sans-serif;
-    line-height: 2;
-    letter-spacing: 0.8px;
-    text-shadow: 0 0 1px rgba(0,0,0,0.1);
+    line-height: 1.8;
+    letter-spacing: 1px;
+    font-weight: 600; /* Increased for visibility */
+    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.15); /* Popped for clarity */
 }
 
 .app-container {
@@ -37,7 +38,7 @@ body {
     overflow: hidden;
 }
 
-/* Landing Screen */
+/* Landing Overlay */
 .landing-overlay {
     position: fixed;
     inset: 0;
@@ -54,8 +55,8 @@ body {
 
 .landing-ganesha {
     width: 150px;
-    animation: floatGanesha 4s ease-in-out infinite;
     margin-bottom: 2rem;
+    animation: floatGanesha 4s ease-in-out infinite;
 }
 
 @keyframes floatGanesha {
@@ -72,16 +73,9 @@ body {
     border-radius: 40px;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
-    animation: pulseButton 2s infinite;
 }
 
-@keyframes pulseButton {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-/* Slide Styles */
+/* Stories & Slides */
 .story-container {
     height: 100dvh;
     width: 100vw;
@@ -104,127 +98,111 @@ body {
     padding: 2.5rem;
 }
 
+.slide::after {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(184, 134, 11, 0.1);
+    pointer-events: none;
+    z-index: 50;
+}
+
 .content-frame {
     z-index: 10;
     width: 100%;
     text-align: center;
 }
 
-/* Slide 1 - Enhanced Titles */
+/* Slide 1 - Max Visibility Telugu */
 .telugu-main-title {
-    font-size: 2.8rem;
+    font-size: 3rem; /* Increased size */
     font-family: 'Gidugu', serif;
-    color: var(--primary-color);
-    margin-top: 1rem;
+    color: #B8860B;
+    font-weight: 700;
 }
 
 .ceremony-headline {
     font-family: 'Gidugu', serif;
-    font-size: 3.5rem;
+    font-size: 4rem; /* Massive impact */
     font-weight: 800;
     color: #8B4513; 
     line-height: 1.1;
-    text-shadow: 2px 2px 0px rgba(184, 134, 11, 0.2);
-    margin: 1.5rem 0;
+    margin: 2rem 0;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
-.subtitle-en { font-style: italic; color: #888; font-size: 0.9rem; letter-spacing: 2px; }
-
-/* Slide 2 - Real Photo Hero */
-.parallax-wrapper {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
+/* Slide 2 & 5 - Family/Host Visibility */
+.host-name, .welcomers-list p {
+    font-size: 1.3rem; /* Improved for small screens */
+    color: #5C4033;
+    margin-bottom: 0.5rem;
 }
 
-.vatu-hero-photo {
-    position: absolute;
-    bottom: 0;
-    left: 10%;
-    width: 80%;
-    height: 90%;
-    object-fit: contain;
-    opacity: 0.25; /* Blended with background */
-    filter: sepia(0.2);
-    mask-image: linear-gradient(to top, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
-    animation: zoomReveal 2s ease-out;
-}
+.rel-tag { font-size: 0.9rem; color: #888; font-style: italic; }
 
-@keyframes zoomReveal {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 0.25; }
-}
+.vatu-prefix { font-size: 1.2rem; color: #8B4513; }
 
 .vatu-hero-name, .venue-hero-name {
     font-family: 'Gidugu', serif;
-    font-size: 3.2rem;
+    font-size: 3.5rem;
     color: #8B4513; 
     margin: 1.5rem 0;
     border-bottom: 4px double var(--primary-color);
     display: inline-block;
-    padding-bottom: 5px;
-    background: linear-gradient(to right, #8B4513, #B8860B);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    padding-bottom: 10px;
 }
 
-/* Venue Backgrounds */
-.mobile-vatu-bg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%; height: 100%; object-fit: contain; opacity: 0.15; z-index: 1;
+/* Slide Date & Time Visibility */
+.traditional-text p {
+    font-size: 1.1rem;
+    color: #5C4033;
 }
 
 .date-hero-card {
     background: var(--gold-silk);
-    padding: 2rem 1rem;
+    padding: 2rem 1.5rem;
     border-radius: 20px;
-    box-shadow: var(--card-shadow);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     margin: 2.5rem 0;
 }
 
-.d-text { font-size: 2.4rem; font-weight: bold; color: #FF8B45; }
+.d-text { font-size: 2.5rem; font-weight: bold; color: #FF8B45; letter-spacing: 2px; }
+.t-text { font-size: 2rem; font-weight: 700; color: #8B4513; margin-top: 10px; }
 
-/* Flower Particles */
-.flower-vfx {
-    position: fixed; inset: 0; pointer-events: none; z-index: 1000; overflow: hidden;
+/* Portrait Blending (Slide 2) */
+.parallax-wrapper { position: absolute; inset: 0; z-index: 1; }
+.vatu-hero-photo {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 90%; height: 90%; object-fit: contain; opacity: 0.25; filter: sepia(0.2);
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+    animation: zoomReveal 2s ease-out;
 }
 
+/* Venue Section */
+.venue-header { font-size: 1.2rem; letter-spacing: 6px; color: var(--primary-color); font-weight: 800; }
+.venue-location { font-size: 1.3rem; color: #5C4033; }
+.direction-btn {
+    display: inline-block; margin: 2rem 0; padding: 14px 40px;
+    background: var(--gold-silk); border: 2px solid var(--primary-color);
+    color: var(--text-color); font-weight: 800; border-radius: 12px; text-decoration: none;
+}
+
+/* Particle Effects */
+.flower-vfx { position: fixed; inset: 0; pointer-events: none; z-index: 1000; overflow: hidden; }
 .petal {
-    position: absolute; width: 20px; height: 20px; border-radius: 10px 0 10px 0;
+    position: absolute; width: 22px; height: 22px; border-radius: 11px 0 11px 0;
     animation: petalFall 12s linear infinite; opacity: 0.6;
 }
 
-@keyframes petalFall {
-    0% { transform: translateY(-10vh) rotate(0); opacity: 0; }
-    10% { opacity: 0.8; }
-    100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
-}
-
-/* Dots & Controls */
 .story-dots {
     position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
     display: flex; flex-direction: column; gap: 15px; z-index: 500;
 }
 
-.story-dot { width: 4px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 50%; transition: 0.4s; }
-.story-dot.active { border-radius: 10px; height: 30px; background: var(--primary-color); }
-
-.audio-control {
-    position: fixed; top: 25px; right: 25px; z-index: 5000;
-    background: rgba(255, 255, 255, 0.9); width: 45px; height: 45px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+.story-dot { width: 5px; height: 5px; background: rgba(0,0,0,0.1); border-radius: 50%; }
+.story-dot.active { border-radius: 12px; height: 35px; background: var(--primary-color); }
 
 .fade-in { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
 .slide.active .fade-in { opacity: 1; transform: translateY(0); }
-
-.direction-btn {
-    display: inline-block; margin: 1.5rem 0; padding: 12px 35px;
-    background: var(--gold-silk); border: 1px solid var(--primary-color);
-    color: var(--text-color); font-weight: 700; border-radius: 10px; text-decoration: none;
-}
 
 ::-webkit-scrollbar { display: none; }
