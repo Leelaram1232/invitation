@@ -1,8 +1,7 @@
 :root {
     --primary-color: #B8860B; /* Deep Gold */
-    --accent-color: #FF8C00; /* Rich Orange */
+    --accent-color: #FF8BA7; /* Rose Pink for accents */
     --text-color: #5C4033; /* Dark Coffee */
-    --bg-light: #FFF9E9; /* Premium Cream */
     --bg-cream: #FFFAF0; /* Floral Cream */
     --gold-silk: linear-gradient(135deg, #FFDF91 0%, #FFF9E9 100%);
     --card-shadow: 0 10px 30px rgba(184, 134, 11, 0.15);
@@ -24,52 +23,22 @@ body {
     width: 100vw;
 }
 
-.telugu-font, .telugu-main, .ceremony-tag, .vatu-name, .traditional-text p {
+.telugu-font, .telugu-title, .ceremony-label, .vatu-name, .traditional-text p {
     font-family: 'Mandali', sans-serif;
     line-height: 2.2;
     letter-spacing: 0.8px;
     text-shadow: 0 0 1px rgba(0,0,0,0.1);
 }
 
-/* App Container - Forced Portrait on Mobile */
 .app-container {
     height: 100dvh;
     width: 100vw;
     position: relative;
     overflow: hidden;
-    background: var(--bg-light);
+    background: var(--bg-cream);
 }
 
-/* Background Texture */
-.app-container::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
-    opacity: 0.4;
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* Audio Control - Elegant Design */
-.audio-control {
-    position: fixed;
-    top: 25px;
-    right: 25px;
-    z-index: 100;
-    background: white;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    cursor: pointer;
-    border: 1px solid rgba(184, 134, 11, 0.2);
-}
-
-/* Landing Overlay - Traditional Theme */
+/* Cinematic Intro (Landing Overlay) */
 .landing-overlay {
     position: fixed;
     inset: 0;
@@ -79,25 +48,92 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);
+    transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1), opacity 1s ease;
 }
 
 .landing-overlay.hidden {
-    transform: scale(1.2);
+    transform: translateY(-100%);
     opacity: 0;
     pointer-events: none;
 }
 
-.landing-ganesha {
-    width: 160px;
-    margin-bottom: 2rem;
-    animation: floatingGanesha 4s ease-in-out infinite;
-    filter: drop-shadow(0 4px 8px rgba(184, 134, 11, 0.3));
+.intro-layers {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
-@keyframes floatingGanesha {
-    0%, 100% { transform: translateY(0) scale(1.0); }
-    50% { transform: translateY(-15px) scale(1.05); }
+/* Mandala Background Animation */
+.intro-mandala {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: url('assets/mandala.png') center/contain no-repeat;
+    opacity: 0.1;
+    animation: rotateSlow 30s linear infinite;
+    z-index: 1;
+}
+
+@keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.intro-ganesha {
+    width: 160px;
+    z-index: 5;
+    animation: entranceZoom 2s cubic-bezier(0.19, 1, 0.22, 1);
+    filter: drop-shadow(0 4px 15px rgba(184, 134, 11, 0.2));
+}
+
+@keyframes entranceZoom {
+    0% { transform: scale(0.5); opacity: 0; filter: blur(10px); }
+    100% { transform: scale(1); opacity: 1; filter: blur(0); }
+}
+
+.intro-text {
+    margin-top: 2rem;
+    z-index: 10;
+    text-align: center;
+}
+
+.divine-tagline {
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.invitation-heading {
+    font-size: 2.2rem;
+    letter-spacing: 8px;
+    font-weight: 300;
+    color: #4B3621;
+}
+
+.fade-reveal {
+    opacity: 0;
+    animation: fadeUpReveal 1.5s forwards 1s;
+}
+
+@keyframes fadeUpReveal {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.action-layer {
+    margin-top: 3.5rem;
+    z-index: 100;
+}
+
+.fade-reveal-delayed {
+    opacity: 0;
+    animation: fadeUpReveal 1.5s forwards 2s;
 }
 
 .open-btn {
@@ -105,23 +141,19 @@ body {
     background: linear-gradient(135deg, #D4AF37, #B8860B);
     color: white;
     font-weight: 700;
-    font-family: inherit;
     border: none;
     border-radius: 40px;
-    font-size: 1rem;
-    letter-spacing: 2px;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
-    animation: btnPulse 2s infinite;
+    animation: pulseBtn 2s infinite;
 }
 
-@keyframes btnPulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.7); }
-    70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
-    100% { transform: scale(1); }
+@keyframes pulseBtn {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
-/* Story Cinematic Container */
+/* Stories & Slides */
 .story-container {
     height: 100dvh;
     width: 100vw;
@@ -129,7 +161,6 @@ body {
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    z-index: 1;
 }
 
 .slide {
@@ -141,149 +172,76 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
     overflow: hidden;
 }
 
-/* Slide Content Framing */
-.slide::after {
+.slide::before {
     content: '';
     position: absolute;
     inset: 15px;
     border: 1px solid rgba(184, 134, 11, 0.1);
     pointer-events: none;
-    z-index: 10;
+    z-index: 50;
 }
 
 .content-frame {
-    position: relative;
-    z-index: 5;
-    padding: 2rem;
+    z-index: 10;
+    padding: 2.5rem;
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
 }
 
-/* Visual Elements */
-.corner-mandala {
-    position: absolute;
-    width: 150px;
-    opacity: 0.15;
-    z-index: 2;
-}
-
-.top-left { top: -20px; left: -20px; transform: rotate(180deg); }
-.top-right { top: -20px; right: -20px; transform: rotate(180deg) scaleX(-1); }
-.bottom-left { bottom: -20px; left: -20px; }
-.bottom-right { bottom: -20px; right: -20px; transform: scaleX(-1); }
-
-.bg-illustration {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    opacity: 0.2;
-    z-index: 1;
-    filter: sepia(0.5) contrast(0.8);
-}
-
-/* Text and Titles */
 .telugu-title {
     font-size: 2.5rem;
     font-family: 'Gidugu', serif;
-    color: var(--accent-color);
-    margin-bottom: 2rem;
+    color: #B8860B;
     line-height: 1.2;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
+    margin-bottom: 1.5rem;
 }
-
-.ceremony-label {
-    font-family: 'Mandali', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    letter-spacing: 3px;
-    padding: 10px 20px;
-    border-top: 1px solid var(--primary-color);
-    border-bottom: 1px solid var(--primary-color);
-    margin-bottom: 2rem;
-}
-
-.hosts-section {
-    margin-bottom: 2.5rem;
-}
-
-.host-names { font-size: 1.1rem; font-weight: 600; color: var(--primary-color); }
-.relation-tag { font-size: 0.9rem; margin: 5px 0; color: #888; letter-spacing: 1px; }
 
 .vatu-name {
     font-family: 'Gidugu', serif;
     font-size: 3rem;
-    color: #8B4513; 
-    font-weight: 800;
-    margin: 1.5rem 0;
+    color: #8B4513;
     text-decoration: underline double var(--primary-color);
+    margin: 1rem 0;
 }
 
-/* Date Section */
-.date-highlight {
+.date-hero {
     background: var(--gold-silk);
-    padding: 2rem 1.5rem;
+    padding: 2rem 1rem;
     border-radius: 20px;
     box-shadow: var(--card-shadow);
     margin: 2rem 0;
-    width: 80%;
 }
 
-.d-text { font-size: 1.8rem; font-weight: 800; color: var(--accent-color); }
-.t-text { font-size: 1rem; margin-top: 10px; color: var(--text-color); font-weight: 600; }
+.d-text { font-size: 2rem; font-weight: bold; color: #FF8B45; }
 
-/* Venue & Welcomers */
-.venue-details {
-    padding: 1.5rem;
-    border: 1px dashed var(--primary-color);
-    border-radius: 15px;
-    width: 90%;
-    background: white;
-}
-
-.map-btn {
-    display: inline-block;
-    margin-top: 1.5rem;
-    color: var(--primary-color);
-    font-weight: 700;
-    text-decoration: none;
-    border-bottom: 2px solid var(--primary-color);
-}
-
-/* Falling Flowers Vfx */
+/* Flower Particles */
 .flower-vfx {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 50;
+    z-index: 2000;
     overflow: hidden;
 }
 
 .petal {
     position: absolute;
-    width: 25px;
-    height: 25px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    animation: flowerFalling 10s linear infinite;
-    opacity: 0.8;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px 0 10px 0;
+    animation: petalFall 12s linear infinite;
+    opacity: 0.6;
 }
 
-@keyframes flowerFalling {
-    0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) translateX(150px) rotate(720deg); opacity: 0; }
+@keyframes petalFall {
+    0% { transform: translateY(-10vh) rotate(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
 }
 
-/* Slide Progress bar */
+/* Dots */
 .story-dots {
     position: fixed;
     right: 20px;
@@ -292,13 +250,13 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    z-index: 100;
+    z-index: 500;
 }
 
-.story-dot { width: 5px; height: 5px; background: rgba(0,0,0,0.1); border-radius: 50%; transition: 0.4s; }
-.story-dot.active { border-radius: 10px; height: 30px; background: var(--accent-color); }
+.story-dot { width: 4px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 50%; transition: 0.4s; }
+.story-dot.active { border-radius: 10px; height: 30px; background: var(--primary-color); }
 
-/* Animation entry */
+/* Fade-in Entrance for Slides */
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -310,9 +268,24 @@ body {
     transform: translateY(0);
 }
 
-.slide.active .fade-in:nth-child(2) { transition-delay: 0.3s; }
-.slide.active .fade-in:nth-child(3) { transition-delay: 0.6s; }
-.slide.active .fade-in:nth-child(4) { transition-delay: 0.9s; }
+.slide.active .fade-in:nth-child(1) { transition-delay: 0.2s; }
+.slide.active .fade-in:nth-child(2) { transition-delay: 0.5s; }
+.slide.active .fade-in:nth-child(3) { transition-delay: 0.8s; }
 
-/* Hide scrollbar */
+/* Audio Controls */
+.audio-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 5000;
+    background: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
 ::-webkit-scrollbar { display: none; }
