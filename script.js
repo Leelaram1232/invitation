@@ -31,10 +31,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Phase 2: Open Stories (Landing to Reel)
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    const updateSlides = () => {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active', 'flipped', 'next');
+            if (i < currentSlide) {
+                slide.classList.add('flipped');
+            } else if (i === currentSlide) {
+                slide.classList.add('active');
+            } else if (i === currentSlide + 1) {
+                slide.classList.add('next');
+            }
+        });
+        
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentSlide);
+        });
+    };
+
     const handleOpen = () => {
         if (!landingPage) return;
         landingPage.classList.add('hidden');
-        if (slides[0]) slides[0].classList.add('active');
+        updateSlides();
         
         // Second attempt to ensure audio is playing
         if (bgMusic && bgMusic.paused) {
@@ -56,24 +76,54 @@ document.addEventListener('DOMContentLoaded', () => {
         audioToggle.querySelector('.music-icon').textContent = isMuted ? '🔇' : '🔊';
     });
 
-    // Story Slide Observer (RELIABLE FLOW)
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Deactivate all first
-                slides.forEach(s => s.classList.remove('active'));
-                entry.target.classList.add('active');
-                
-                const index = Array.from(slides).indexOf(entry.target);
-                dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-            }
+    // Page Navigation (Swipe & Click)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const navigate = (direction) => {
+        if (direction === 'next' && currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateSlides();
+        } else if (direction === 'prev' && currentSlide > 0) {
+            currentSlide--;
+            updateSlides();
+        }
+    };
+
+    storyWindow.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+
+    storyWindow.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, {passive: true});
+
+    const handleSwipe = () => {
+        const threshold = 50;
+        if (touchStartX - touchEndX > threshold) {
+            navigate('next'); // Swipe Left -> Next
+        } else if (touchEndX - touchStartX > threshold) {
+            navigate('prev'); // Swipe Right -> Prev
+        }
+    };
+
+    // Click on slide to advance (optional but helpful)
+    slides.forEach((slide, index) => {
+        slide.addEventListener('click', (e) => {
+            // Prevent flip if clicking a link/button or its children
+            if (e.target.closest('a') || e.target.closest('button')) return;
+            if (index === currentSlide) navigate('next');
         });
-    }, { 
-        threshold: 0.5,
-        root: storyWindow 
     });
 
-    slides.forEach(slide => observer.observe(slide));
+    // Dot click navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            updateSlides();
+        });
+    });
 
     // Particles System
     function createPetal() {

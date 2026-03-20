@@ -108,20 +108,68 @@ body {
     font-weight: 700; border: none; border-radius: 40px; cursor: pointer;
 }
 
-/* Stories & Slides */
+/* Stories & Slides - BOOK FLIP ENHANCEMENTS */
 .story-container {
-    height: 100dvh; width: 100vw; overflow-y: scroll; scroll-snap-type: y mandatory;
-    scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+    height: 100dvh; width: 100vw; 
+    position: relative;
+    perspective: 1500px;
+    background: #000; /* Backdrop for 3D flip */
+    overflow: hidden;
 }
 
 .slide {
-    height: 100dvh; width: 100vw; scroll-snap-align: start; scroll-snap-stop: always;
-    position: relative; display: flex; align-items: center; justify-content: center;
+    position: absolute;
+    inset: 0;
+    background: var(--bg-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    transform-origin: left center;
+    transition: transform 1s cubic-bezier(0.6, 0.05, 0.28, 0.91), z-index 0s;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
 }
 
-.slide::after { content: ''; position: absolute; inset: 15px; border: 1px solid rgba(184, 134, 11, 0.1); pointer-events: none; z-index: 50; }
+/* Page Texture Overlay */
+.slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 5%, rgba(0,0,0,0) 95%, rgba(0,0,0,0.02) 100%);
+    pointer-events: none;
+    z-index: 10;
+}
 
-.content-frame { z-index: 100; width: 100%; text-align: center; padding: 2rem; position: relative; }
+.slide::after { 
+    content: ''; position: absolute; inset: 15px; 
+    border: 1px solid rgba(184, 134, 11, 0.15); 
+    pointer-events: none; z-index: 50; 
+}
+
+/* Flip Animations */
+.slide.flipped {
+    transform: rotateY(-180deg);
+    pointer-events: none;
+    z-index: 0 !important;
+}
+
+.slide.active {
+    z-index: 10 !important;
+}
+
+.slide.next {
+    z-index: 5 !important;
+}
+
+/* Content visibility during flip */
+.content-frame { 
+    z-index: 100; width: 100%; text-align: center; padding: 2rem; position: relative; 
+    transition: opacity 0.5s;
+}
+
+.slide.flipped .content-frame { opacity: 0; }
 
 /* FONT SIZE & VISIBILITY RESTORED */
 .vatu-hero-name, .venue-hero-name {
