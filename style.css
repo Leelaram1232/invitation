@@ -23,21 +23,19 @@ body {
     width: 100vw;
 }
 
-.telugu-font, .telugu-title, .telugu-main-title, .ceremony-label, .vatu-hero-name, .venue-hero-name, .traditional-text p, .host-name, .welcomers-list p {
+.telugu-font, .telugu-title, .telugu-main-title, .ceremony-label, .vatu-hero-name, .venue-hero-name, .traditional-text p {
     font-family: 'Mandali', sans-serif;
-    line-height: 1.8;
+    line-height: 2;
     letter-spacing: 0.8px;
     font-weight: 400;
 }
 
+/* APP CONTAINER */
 .app-container {
-    height: 100dvh;
-    width: 100vw;
-    position: relative;
-    overflow: hidden;
+    height: 100dvh; width: 100vw; position: relative; overflow: hidden;
 }
 
-/* CIRCULAR GOLD DOOR INTRO - FINAL REFINEMENT */
+/* GOLD DOOR CIRCULAR INTRO */
 .intro-doors {
     position: fixed; inset: 0; z-index: 10000;
     display: flex; justify-content: center; align-items: center; cursor: pointer;
@@ -66,8 +64,7 @@ body {
     background: url('assets/mandala.png') center/contain no-repeat;
     opacity: 0.6;
     animation: rotateOuter 30s linear infinite;
-    z-index: 2;
-    border-radius: 50%;
+    z-index: 2; border-radius: 50%;
 }
 
 .ganesha-container {
@@ -75,17 +72,22 @@ body {
     background: white; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 0 30px rgba(0,0,0,0.15);
-    z-index: 10; border: 3px solid var(--primary-color);
-    overflow: hidden;
+    z-index: 10; border: 3px solid var(--primary-color); overflow: hidden;
 }
 
-.static-ganesha { width: 85px; z-index: 12; }
+.static-ganesha { width: 85px; z-index: 12; display: block; }
+
+.door-tap-hint {
+    position: absolute; bottom: -120px;
+    color: #4B3621; font-weight: bold; letter-spacing: 6px; font-size: 0.8rem;
+    animation: pulseLabel 1.5s infinite;
+}
 
 @keyframes rotateOuter { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pulseLabel { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
 .intro-doors.opened .door-left { transform: translateX(-100%); }
 .intro-doors.opened .door-right { transform: translateX(100%); }
-.intro-doors.opened .door-content { opacity: 0; pointer-events: none; }
 
 /* Landing Overlay */
 .landing-overlay {
@@ -96,8 +98,14 @@ body {
 
 .landing-overlay.hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; visibility: hidden; }
 
+.landing-ganesha {
+    width: 120px; margin-bottom: 2rem; animation: floatGanesha 4s ease-in-out infinite;
+}
+
+@keyframes floatGanesha { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
 .open-btn {
-    padding: 15px 40px; background: linear-gradient(135deg, #D4AF37, #B8860B); color: white;
+    padding: 16px 45px; background: linear-gradient(135deg, #D4AF37, #B8860B); color: white;
     font-weight: 700; border: none; border-radius: 40px; cursor: pointer;
 }
 
@@ -116,40 +124,51 @@ body {
 
 .content-frame { z-index: 100; width: 100%; text-align: center; padding: 2rem; position: relative; }
 
-/* FINAL MOBILE OPTIMIZATION: SMARTER FONT SIZES */
+/* SLIDE 2 - BOY'S FACE VISIBILITY ENHANCEMENT */
+.vatu-hero-photo {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 90%; height: 80%; object-fit: contain;
+    opacity: 0.45; /* Increased visibility as requested */
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%); /* Keeps face clear */
+    z-index: 5;
+    animation: zoomReveal 2s ease-out;
+}
+
 .vatu-hero-name, .venue-hero-name {
     font-family: 'Gidugu', serif;
-    font-size: 2.1rem; /* Balanced for mobile */
+    font-size: 2.1rem;
     color: #8B4513; margin: 0.8rem 0;
     border-bottom: 3px double var(--primary-color);
     display: inline-block; padding-bottom: 5px;
-    line-height: 1.2;
 }
 
-.venue-hero-name { font-size: 1.8rem; } /* Slightly smaller for long venue names */
+/* SLIDE 5: WELL WISHERS PREMIUM HEADING */
+.wishes-title {
+    font-family: 'Gidugu', serif;
+    font-size: 2.2rem;
+    color: #B8860B;
+    margin-bottom: 2rem;
+}
 
-.ceremony-label { font-family: 'Gidugu', serif; font-size: 2.4rem; color: #8B4513; line-height: 1.2; margin: 1rem 0; }
-.telugu-main-title { font-size: 2.2rem; font-family: 'Gidugu', serif; color: #B8860B; }
-
-.vatu-hero-photo {
-    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 90%; height: 75%; object-fit: contain; opacity: 0.2; filter: sepia(0.2);
-    mask-image: linear-gradient(to top, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
-    z-index: 5;
+.wishes-title .en-tag {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    vertical-align: middle;
 }
 
 .date-highlight {
     background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(5px); border: 1px solid rgba(184, 134, 11, 0.1);
-    padding: 1.8rem 1rem; border-radius: 20px; margin: 1.2rem 0;
+    padding: 2rem 1rem; border-radius: 20px; margin: 1.5rem 0;
 }
 
 .d-text { font-size: 1.8rem; font-weight: bold; color: #FF8B45; }
-.t-text { font-size: 1.5rem; font-weight: 700; color: #8B4513; }
 
 /* Flower Particles */
 .flower-vfx { position: fixed; inset: 0; pointer-events: none; z-index: 1000; overflow: hidden; }
 .petal {
-    position: absolute; width: 14px; height: 14px; border-radius: 7px 0 7px 0;
+    position: absolute; width: 16px; height: 16px; border-radius: 8px 0 8px 0;
     animation: petalFall 12s linear infinite; opacity: 0.6;
 }
 
@@ -170,14 +189,15 @@ body {
 .fade-in { opacity: 0; transform: translateY(30px); transition: 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
 .slide.active .fade-in { opacity: 1; transform: translateY(0); }
 
-/* Venue & Navigation */
-.venue-header { font-size: 1.0rem; letter-spacing: 4px; color: var(--primary-color); font-weight: 800; margin-bottom: 0.8rem; }
-.venue-divider { width: 40px; height: 1px; background: var(--primary-color); margin: 0.5rem auto 1.2rem; opacity: 0.4; }
+@keyframes zoomReveal {
+    from { transform: scale(0.9) translateX(-50%); opacity: 0; }
+    to { transform: scale(1) translateX(-50%); opacity: 0.45; }
+}
 
 .direction-btn {
     display: inline-block; margin: 1.2rem 0; padding: 10px 30px;
     background: var(--gold-silk); border: 1px solid var(--primary-color);
-    color: var(--text-color); font-weight: 700; border-radius: 10px; text-decoration: none; font-size: 0.9rem;
+    color: var(--text-color); font-weight: 700; border-radius: 10px; text-decoration: none;
 }
 
 .audio-control {
