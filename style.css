@@ -1,0 +1,317 @@
+:root {
+    --primary-color: #B8860B; /* Deep Gold */
+    --accent-color: #FF8C00; /* Rich Orange */
+    --text-color: #5C4033; /* Dark Coffee */
+    --bg-light: #FFF9E9; /* Premium Cream */
+    --bg-cream: #FFFAF0; /* Floral Cream */
+    --gold-silk: linear-gradient(135deg, #FFDF91 0%, #FFF9E9 100%);
+    --card-shadow: 0 10px 30px rgba(184, 134, 11, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #FDF5E6;
+    color: var(--text-color);
+    font-family: 'Playfair Display', serif;
+    overflow: hidden;
+    height: 100dvh;
+    width: 100vw;
+}
+
+.telugu-font, .telugu-main, .ceremony-tag, .vatu-name, .traditional-text p {
+    font-family: 'Mandali', sans-serif;
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+}
+
+/* App Container - Forced Portrait on Mobile */
+.app-container {
+    height: 100dvh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-light);
+}
+
+/* Background Texture */
+.app-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Audio Control - Elegant Design */
+.audio-control {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 100;
+    background: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+    border: 1px solid rgba(184, 134, 11, 0.2);
+}
+
+/* Landing Overlay - Traditional Theme */
+.landing-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, #FFFDF0 0%, #FFF9E9 100%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.landing-overlay.hidden {
+    transform: scale(1.2);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.landing-ganesha {
+    width: 160px;
+    margin-bottom: 2rem;
+    animation: floatingGanesha 4s ease-in-out infinite;
+    filter: drop-shadow(0 4px 8px rgba(184, 134, 11, 0.3));
+}
+
+@keyframes floatingGanesha {
+    0%, 100% { transform: translateY(0) scale(1.0); }
+    50% { transform: translateY(-15px) scale(1.05); }
+}
+
+.open-btn {
+    padding: 16px 50px;
+    background: linear-gradient(135deg, #D4AF37, #B8860B);
+    color: white;
+    font-weight: 700;
+    font-family: inherit;
+    border: none;
+    border-radius: 40px;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+    animation: btnPulse 2s infinite;
+}
+
+@keyframes btnPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+    100% { transform: scale(1); }
+}
+
+/* Story Cinematic Container */
+.story-container {
+    height: 100dvh;
+    width: 100vw;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1;
+}
+
+.slide {
+    height: 100dvh;
+    width: 100vw;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Slide Content Framing */
+.slide::after {
+    content: '';
+    position: absolute;
+    inset: 15px;
+    border: 1px solid rgba(184, 134, 11, 0.1);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.content-frame {
+    position: relative;
+    z-index: 5;
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Visual Elements */
+.corner-mandala {
+    position: absolute;
+    width: 150px;
+    opacity: 0.15;
+    z-index: 2;
+}
+
+.top-left { top: -20px; left: -20px; transform: rotate(180deg); }
+.top-right { top: -20px; right: -20px; transform: rotate(180deg) scaleX(-1); }
+.bottom-left { bottom: -20px; left: -20px; }
+.bottom-right { bottom: -20px; right: -20px; transform: scaleX(-1); }
+
+.bg-illustration {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.2;
+    z-index: 1;
+    filter: sepia(0.5) contrast(0.8);
+}
+
+/* Text and Titles */
+.telugu-title {
+    font-size: 2.5rem;
+    font-family: 'Gidugu', serif;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
+}
+
+.ceremony-label {
+    font-family: 'Mandali', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 3px;
+    padding: 10px 20px;
+    border-top: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+.hosts-section {
+    margin-bottom: 2.5rem;
+}
+
+.host-names { font-size: 1.1rem; font-weight: 600; color: var(--primary-color); }
+.relation-tag { font-size: 0.9rem; margin: 5px 0; color: #888; letter-spacing: 1px; }
+
+.vatu-name {
+    font-family: 'Gidugu', serif;
+    font-size: 3rem;
+    color: #8B4513; 
+    font-weight: 800;
+    margin: 1.5rem 0;
+    text-decoration: underline double var(--primary-color);
+}
+
+/* Date Section */
+.date-highlight {
+    background: var(--gold-silk);
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    margin: 2rem 0;
+    width: 80%;
+}
+
+.d-text { font-size: 1.8rem; font-weight: 800; color: var(--accent-color); }
+.t-text { font-size: 1rem; margin-top: 10px; color: var(--text-color); font-weight: 600; }
+
+/* Venue & Welcomers */
+.venue-details {
+    padding: 1.5rem;
+    border: 1px dashed var(--primary-color);
+    border-radius: 15px;
+    width: 90%;
+    background: white;
+}
+
+.map-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Falling Flowers Vfx */
+.flower-vfx {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: flowerFalling 10s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes flowerFalling {
+    0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) translateX(150px) rotate(720deg); opacity: 0; }
+}
+
+/* Slide Progress bar */
+.story-dots {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 100;
+}
+
+.story-dot { width: 5px; height: 5px; background: rgba(0,0,0,0.1); border-radius: 50%; transition: 0.4s; }
+.story-dot.active { border-radius: 10px; height: 30px; background: var(--accent-color); }
+
+/* Animation entry */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide.active .fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide.active .fade-in:nth-child(2) { transition-delay: 0.3s; }
+.slide.active .fade-in:nth-child(3) { transition-delay: 0.6s; }
+.slide.active .fade-in:nth-child(4) { transition-delay: 0.9s; }
+
+/* Hide scrollbar */
+::-webkit-scrollbar { display: none; }

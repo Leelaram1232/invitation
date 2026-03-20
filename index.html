@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Upanayanam Invitation | Sai Krishna Siddharth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Mandali&family=Gidugu&family=Hind+Guntur:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Flower VFX Layer -->
+        <div class="flower-vfx" id="flowerLayer"></div>
+
+        <!-- Audio Control -->
+        <div class="audio-control" id="audioToggle">
+            <div class="music-icon">🎵</div>
+        </div>
+
+        <!-- Landing Screen -->
+        <div id="landingPage" class="landing-overlay">
+            <img src="assets/ganesha.png" alt="Ganesha" class="landing-ganesha">
+            <h2 class="divine-tagline">OM SHREE GANESHAY NAMAH</h2>
+            <button class="open-btn" id="openInvitation">OPEN INVITATION</button>
+            <div class="hint-text">TAP TO ENTER</div>
+        </div>
+
+        <!-- Scrollable Story Flow -->
+        <div class="story-container" id="storyWindow">
+
+            <!-- Slide 1: Welcome -->
+            <section class="slide" id="slide1">
+                <div class="pattern-bg"></div>
+                <div class="content-frame">
+                    <img src="assets/ganesha.png" width="80" class="fade-in">
+                    <h1 class="telugu-title fade-in telugu-font">సామవేదం వారి ఆహ్వానం</h1>
+                    <div class="ceremony-label fade-in telugu-font">ఉపనయన మహోత్సవము</div>
+                    <p class="fade-in">Join us in celebrating this divine milestone</p>
+                </div>
+            </section>
+
+            <!-- Slide 2: The Boy & Family -->
+            <section class="slide" id="slide2">
+                <img src="assets/vatu_ritual.png" class="bg-illustration">
+                <div class="content-frame">
+                    <div class="hosts-section fade-in">
+                        <p class="host-names telugu-font">శ్రీ సామవేదం శ్రీనివాసన్ - శ్రీ మతి నాగరాణి గార్ల</p>
+                        <p class="relation-tag">తమ్ముడు</p>
+                        <p class="host-names telugu-font">సామవేదం శ్రీకాంత్ - శారదా గార్ల ఏకైక కుమారుడు</p>
+                    </div>
+                    <div class="vatu-tag fade-in">చి||</div>
+                    <h1 class="vatu-name fade-in telugu-font">సాయి కృష్ణ సిద్ధార్థ్</h1>
+                    <div class="relation-tag fade-in">అను వాటువుకు</div>
+                    <p class="host-names fade-in telugu-font">నిర్మల రామ కృష్ణ గారి మానవడు</p>
+                </div>
+            </section>
+
+            <!-- Slide 3: Time & Muhurtham -->
+            <section class="slide" id="slide3">
+                <div class="content-frame">
+                    <div class="traditional-text fade-in telugu-font">
+                        <p>స్వస్తిశ్రీ చాంద్రమానేన శ్రీ పరాభవ నామ సంవత్సర</p>
+                        <p>చైత్ర భాహుళ షష్ఠి సోమవారం తేదీ</p>
+                    </div>
+                    <div class="date-highlight fade-in">
+                        <p class="d-text">APRIL 13, 2026</p>
+                        <p class="t-text telugu-font">ఉదయం గం|| 11:20 ని||లకు</p>
+                    </div>
+                    <div class="muhurtham-details fade-in telugu-font">
+                        <p>ధనిష్ఠి నక్షత్రము మరియు మిధున లగ్న</p>
+                        <p>పుష్కరాంశము నందు</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Venue & Invite -->
+            <section class="slide" id="slide4">
+                <img src="assets/family_homa.png" class="bg-illustration" style="opacity: 0.15">
+                <div class="content-frame">
+                    <div class="venue-details fade-in">
+                        <h3 class="section-title">VENUE (వేదిక)</h3>
+                        <h4 class="venue-name telugu-font">శ్రీ సీతారామస్వామి వారి కళ్యాణ మండపం</h4>
+                        <p class="venue-loc telugu-font">ఏనికెపాడు, విజయవాడ నందు</p>
+                        <a href="https://maps.app.goo.gl/B97o5w1Z7u6qR6F98" target="_blank"
+                            class="map-btn">DIRECTIONS</a>
+                    </div>
+                    <p class="invite-msg fade-in telugu-font"
+                        style="margin-top: 2rem; font-size: 0.9rem; font-style: italic;">
+                        కవున సకుటుంబంగా విచ్చేసి వాటువుకు ఆశీర్వదించి మా ఆతిధ్యాన్ని స్వీకరించి మామ్మూ నందింపజేయ
+                        ప్రార్థన
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 5: Well Wishers -->
+            <section class="slide" id="slide5">
+                <div class="content-frame">
+                    <h2 class="section-title fade-in">భవదాగమనాభిలాషులు (WELL WISHERS)</h2>
+                    <div class="well-wishers telugu-font fade-in">
+                        <p>శ్రీ సామవేదం విజయసారథి - శ్రీ మతి వెంకట శ్రీలక్ష్మి</p>
+                        <p>శ్రీ పెద్దింటి పవన్ - విపాష</p>
+                        <p>శ్రీ తూపురాని శ్రీనివాసరామానుజాచార్యులు - సాధన</p>
+                    </div>
+                    <div class="ganesha-mini fade-in" style="margin-top: 3rem;">
+                        <img src="assets/ganesha.png" width="60" style="opacity: 0.5;">
+                    </div>
+                    <p class="fade-in" style="font-size: 0.8rem; letter-spacing: 5px; margin-top: 1rem;">SAI KRISHNA
+                        SIDDHARTH</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Slide Dots -->
+        <div class="story-dots">
+            <span class="story-dot active"></span>
+            <span class="story-dot"></span>
+            <span class="story-dot"></span>
+            <span class="story-dot"></span>
+            <span class="story-dot"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
