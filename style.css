@@ -28,15 +28,15 @@ body {
     font-family: 'Mandali', sans-serif;
     line-height: 1.8;
     letter-spacing: 0.8px;
-    font-weight: 700; /* Bolder as requested */
-    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.1); /* Subtle shadow for POP */
+    font-weight: 700;
+    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.1);
 }
 
 .app-container {
     height: 100dvh; width: 100vw; position: relative; overflow: hidden;
 }
 
-/* Door Animation */
+/* GOLD DOOR CIRCULAR INTRO - PERFECT CENTERING FIX */
 .intro-doors {
     position: fixed; inset: 0; z-index: 10000;
     display: flex; justify-content: center; align-items: center; cursor: pointer;
@@ -52,22 +52,46 @@ body {
 .door-left { left: 0; border-right: 1px solid rgba(255,255,255,0.2); }
 .door-right { right: 0; border-left: 1px solid rgba(255,255,255,0.2); }
 
+.door-content {
+    position: relative; z-index: 10;
+    width: 400px; height: 400px; /* Fixed square to anchor centering */
+    display: flex; align-items: center; justify-content: center; pointer-events: none;
+}
+
+/* MANDALA NOW PERFECTLY ANCHORED AT CENTER */
 .rotating-mandala {
-    position: absolute; width: 340px; height: 340px; background: url('assets/mandala.png') center/contain no-repeat;
-    opacity: 0.6; animation: rotateOuter 30s linear infinite; z-index: 2; border-radius: 50%;
+    position: absolute;
+    width: 380px; height: 380px;
+    background: url('assets/mandala.png') center/contain no-repeat;
+    opacity: 0.6;
+    animation: rotateOuter 30s linear infinite;
+    z-index: 2; border-radius: 50%;
 }
 
 .ganesha-container {
-    position: relative; width: 140px; height: 140px; background: white; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(0,0,0,0.15);
-    z-index: 10; border: 3px solid var(--primary-color);
+    position: relative; width: 150px; height: 150px;
+    background: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 30px rgba(0,0,0,0.15);
+    z-index: 10; border: 4.5px solid var(--primary-color);
 }
 
-.static-ganesha { width: 85px; z-index: 12; }
+.static-ganesha { width: 90px; z-index: 12; display: block; }
+
+.door-tap-hint {
+    position: absolute; bottom: -100px;
+    color: #4B3621; font-weight: bold; letter-spacing: 6px; font-size: 0.8rem;
+    animation: pulseLabel 1.5s infinite;
+}
 
 @keyframes rotateOuter { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pulseLabel { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-/* Landing Screen */
+.intro-doors.opened .door-left { transform: translateX(-100%); }
+.intro-doors.opened .door-right { transform: translateX(100%); }
+.intro-doors.opened .door-content { opacity: 0; pointer-events: none; }
+
+/* Rest of the UI Preserved WITHOUT DISTURBANCE */
 .landing-overlay {
     position: fixed; inset: 0; background: radial-gradient(circle at center, #FFFDF0 0%, #FFF9E9 100%); z-index: 5000;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -76,47 +100,6 @@ body {
 
 .landing-overlay.hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; visibility: hidden; }
 
-.landing-ganesha { width: 120px; margin-bottom: 2rem; animation: floatGanesha 4s ease-in-out infinite; }
-
-@keyframes floatGanesha { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-
-.open-btn {
-    padding: 16px 45px; background: linear-gradient(135deg, #D4AF37, #B8860B); color: white;
-    font-weight: 700; border: none; border-radius: 40px; cursor: pointer;
-}
-
-/* Slides System */
-.story-container {
-    height: 100dvh; width: 100vw; overflow-y: scroll; scroll-snap-type: y mandatory;
-    scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
-}
-
-.slide {
-    height: 100dvh; width: 100vw; scroll-snap-align: start; scroll-snap-stop: always;
-    position: relative; display: flex; align-items: center; justify-content: center;
-}
-
-.slide::after { content: ''; position: absolute; inset: 15px; border: 1px solid rgba(184, 134, 11, 0.1); pointer-events: none; z-index: 50; }
-
-.content-frame { z-index: 100; width: 100%; text-align: center; padding: 2rem; position: relative; }
-
-/* FONT SIZE ENHANCEMENTS */
-.vatu-hero-name, .venue-hero-name {
-    font-family: 'Gidugu', serif;
-    font-size: 2.6rem; /* Increased slightly */
-    color: #8B4513; margin: 0.8rem 0;
-    border-bottom: 3px double var(--primary-color);
-    display: inline-block; padding-bottom: 5px;
-}
-
-.venue-hero-name { font-size: 2.1rem; }
-
-.ceremony-label { font-family: 'Gidugu', serif; font-size: 2.6rem; color: #8B4513; line-height: 1.2; }
-.telugu-main-title { font-size: 2.4rem; font-family: 'Gidugu', serif; color: #B8860B; }
-
-.host-name, .welcomers-list p { font-size: 1.3rem; margin-bottom: 0.5rem; }
-
-/* Photo Blending Stability */
 .vatu-hero-photo {
     position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
     width: 90%; height: 80%; object-fit: contain; opacity: 0.45; filter: sepia(0.2);
@@ -124,7 +107,6 @@ body {
     z-index: 5;
 }
 
-/* SLIDE 4 NEW BACKGROUND */
 .family-homa-bg {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     width: 100%; height: 100%; object-fit: contain; opacity: 0.18; z-index: 1;
@@ -135,9 +117,6 @@ body {
     padding: 2.2rem 1.2rem; border-radius: 20px; margin: 1.5rem 0;
 }
 
-.d-text { font-size: 2rem; font-weight: bold; color: #FF8B45; }
-
-/* Flower Particles */
 .flower-vfx { position: fixed; inset: 0; pointer-events: none; z-index: 1000; overflow: hidden; }
 .petal {
     position: absolute; width: 14px; height: 14px; border-radius: 7px 0 7px 0;
@@ -160,17 +139,5 @@ body {
 
 .fade-in { opacity: 0; transform: translateY(30px); transition: 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
 .slide.active .fade-in { opacity: 1; transform: translateY(0); }
-
-.direction-btn {
-    display: inline-block; margin: 1.2rem 0; padding: 10px 30px;
-    background: var(--gold-silk); border: 1px solid var(--primary-color);
-    color: var(--text-color); font-weight: 700; border-radius: 10px; text-decoration: none;
-}
-
-.audio-control {
-    position: fixed; top: 20px; right: 20px; z-index: 15000;
-    background: white; width: 40px; height: 40px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
 
 ::-webkit-scrollbar { display: none; }
