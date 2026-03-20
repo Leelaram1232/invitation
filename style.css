@@ -22,7 +22,7 @@ body {
     width: 100vw;
 }
 
-.telugu-font, .telugu-title, .ceremony-label, .vatu-hero-name, .traditional-text p {
+.telugu-font, .telugu-title, .ceremony-label, .vatu-hero-name, .venue-hero-name, .traditional-text p {
     font-family: 'Mandali', sans-serif;
     line-height: 2.2;
     letter-spacing: 0.8px;
@@ -36,7 +36,7 @@ body {
     overflow: hidden;
 }
 
-/* Landing Overlay - Back to Original Clean Style */
+/* Landing Overlay */
 .landing-overlay {
     position: fixed;
     inset: 0;
@@ -122,7 +122,7 @@ body {
     text-align: center;
 }
 
-/* Slide 2 Specific Styling - Per Screenshot */
+/* Unified Premium Background logic for Slide 2 and 4 */
 .mobile-vatu-bg {
     position: absolute;
     top: 50%;
@@ -136,18 +136,38 @@ body {
     z-index: 1;
 }
 
-.vatu-hero-name {
+.vatu-hero-name, .venue-hero-name {
     font-family: 'Gidugu', serif;
     font-size: 3.2rem;
-    color: #8B4513; /* Rich gold/brown */
+    color: #8B4513; 
     margin: 1.5rem 0;
     border-bottom: 4px double var(--primary-color);
     display: inline-block;
     padding-bottom: 5px;
 }
 
-.host-name { font-size: 1.1rem; color: #B8860B; }
-.rel-tag { font-size: 0.9rem; margin: 5px 0; color: #888; letter-spacing: 1px; }
+.venue-hero-name {
+    font-size: 2.2rem; /* Adjusted for longer Telugu names */
+    line-height: 1.4;
+}
+
+.venue-header { font-size: 1.1rem; letter-spacing: 5px; color: var(--primary-color); font-weight: 700; margin-bottom: 1rem; }
+.venue-divider { width: 50px; height: 1px; background: var(--primary-color); margin: 0.5rem auto 1.5rem; opacity: 0.5; }
+
+.direction-btn {
+    display: inline-block;
+    margin: 2rem 0;
+    padding: 12px 35px;
+    background: var(--gold-silk);
+    border: 1px solid var(--primary-color);
+    color: var(--text-color);
+    font-weight: 700;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.invite-msg { font-size: 1rem; color: #888; font-style: italic; margin-top: 1.5rem; }
 
 /* Slide 3 Layout */
 .date-hero-card {
@@ -184,7 +204,7 @@ body {
     100% { transform: translateY(110vh) rotate(720deg) translateX(80px); opacity: 0; }
 }
 
-/* Story Tracking (Dots) */
+/* Dots Tracking */
 .story-dots {
     position: fixed;
     right: 20px;
@@ -199,7 +219,7 @@ body {
 .story-dot { width: 4px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 50%; transition: 0.4s; }
 .story-dot.active { border-radius: 10px; height: 30px; background: var(--primary-color); }
 
-/* Fade / Entrance Animations */
+/* Fade & Entrance */
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -211,7 +231,7 @@ body {
     transform: translateY(0);
 }
 
-.active .vatu-hero-name {
+.active .venue-hero-name {
     animation: zoomReveal 1s ease-out forwards;
 }
 
