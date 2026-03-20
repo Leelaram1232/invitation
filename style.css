@@ -25,7 +25,7 @@ body {
 
 .telugu-font, .telugu-title, .telugu-main-title, .ceremony-label, .vatu-hero-name, .venue-hero-name, .traditional-text p {
     font-family: 'Mandali', sans-serif;
-    line-height: 2.2;
+    line-height: 2;
     letter-spacing: 0.8px;
     font-weight: 400;
 }
@@ -37,7 +37,7 @@ body {
     overflow: hidden;
 }
 
-/* GOLD DOOR INTRO ANIMATION */
+/* GOLD DOOR CIRCULAR INTRO INTRO */
 .intro-doors {
     position: fixed;
     inset: 0;
@@ -46,155 +46,102 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    perspective: 1000px;
 }
 
 .door {
-    position: absolute;
-    top: 0;
-    width: 50%;
-    height: 100%;
+    position: absolute; top: 0; width: 50%; height: 100%;
     background: var(--gold-door);
     transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
-    box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
-.door-left { left: 0; border-right: 1px solid rgba(255,255,255,0.3); }
-.door-right { right: 0; border-left: 1px solid rgba(255,255,255,0.3); }
+.door-left { left: 0; border-right: 1px solid rgba(255,255,255,0.2); }
+.door-right { right: 0; border-left: 1px solid rgba(255,255,255,0.2); }
 
+/* Center Circular Framing */
 .door-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    transition: opacity 1s ease;
+    position: relative; z-index: 10; text-align: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
 
-.om-mandala {
-    width: 200px;
-    height: 200px;
+.rotating-mandala {
+    position: absolute;
+    width: 260px; height: 260px;
     background: url('assets/mandala.png') center/contain no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: rotateDoorMandala 20s linear infinite;
-    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+    opacity: 0.8;
+    animation: rotateOuter 30s linear infinite;
+    border-radius: 50%; /* Ensuring circular feel */
 }
 
-@keyframes rotateDoorMandala {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+.ganesha-container {
+    position: relative;
+    width: 180px; height: 180px;
+    background: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 40px rgba(0,0,0,0.1);
+    z-index: 5;
+    overflow: hidden;
+    border: 5px solid var(--primary-color);
 }
 
-.om-icon {
-    width: 80px;
-    transform: rotate(0); /* Counter-rotate to stay upright if needed */
+.static-ganesha {
+    width: 100px;
+    z-index: 10;
 }
 
-.tap-reveal-hint {
-    margin-top: 2rem;
-    color: #4B3621;
-    font-weight: bold;
-    letter-spacing: 5px;
-    font-size: 0.9rem;
-    animation: pulseHint 1.5s infinite;
+.door-tap-hint {
+    margin-top: 5rem;
+    z-index: 20; color: #4B3621; font-weight: bold; letter-spacing: 5px; font-size: 0.8rem;
+    animation: pulseLabel 1.5s infinite;
 }
 
-@keyframes pulseHint {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-}
+@keyframes rotateOuter { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pulseLabel { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-/* Door Animation States */
 .intro-doors.opened .door-left { transform: translateX(-100%); }
 .intro-doors.opened .door-right { transform: translateX(100%); }
 .intro-doors.opened .door-content { opacity: 0; pointer-events: none; }
 .intro-doors.hidden { display: none; }
 
-/* Landing Overlay Styles */
+/* Landing Screen */
 .landing-overlay {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at center, #FFFDF0 0%, #FFF9E9 100%);
-    z-index: 5000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.8s ease;
+    position: fixed; inset: 0; background: radial-gradient(circle at center, #FFFDF0 0%, #FFF9E9 100%); z-index: 5000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
 
 .landing-overlay.hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 
 .landing-ganesha {
-    width: 150px;
-    margin-bottom: 2rem;
-    animation: floatGanesha 4s ease-in-out infinite;
+    width: 130px; margin-bottom: 2rem; animation: floatGanesha 4s ease-in-out infinite;
 }
 
-@keyframes floatGanesha {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
+@keyframes floatGanesha { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
 .open-btn {
-    padding: 16px 50px;
-    background: linear-gradient(135deg, #D4AF37, #B8860B);
-    color: white;
-    font-weight: 700;
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+    padding: 16px 45px; background: linear-gradient(135deg, #D4AF37, #B8860B); color: white;
+    font-weight: 700; border: none; border-radius: 40px; cursor: pointer;
 }
 
 /* Stories & Slides */
 .story-container {
-    height: 100dvh;
-    width: 100vw;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    height: 100dvh; width: 100vw; overflow-y: scroll; scroll-snap-type: y mandatory;
+    scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
 }
 
 .slide {
-    height: 100dvh;
-    width: 100vw;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 2.5rem;
+    height: 100dvh; width: 100vw; scroll-snap-align: start; scroll-snap-stop: always;
+    position: relative; display: flex; align-items: center; justify-content: center;
 }
 
-.slide::after {
-    content: '';
-    position: absolute;
-    inset: 15px;
-    border: 1px solid rgba(184, 134, 11, 0.1);
-    pointer-events: none;
-    z-index: 50;
-}
+.slide::after { content: ''; position: absolute; inset: 15px; border: 1px solid rgba(184, 134, 11, 0.1); }
 
-.content-frame { z-index: 10; width: 100%; text-align: center; }
+.content-frame { z-index: 10; width: 100%; text-align: center; padding: 2.5rem; }
 
-.telugu-main-title { font-size: 2.5rem; font-family: 'Gidugu', serif; color: #B8860B; }
-.ceremony-label { font-family: 'Gidugu', serif; font-size: 3rem; color: #8B4513; line-height: 1.2; }
-
-/* Portrait Hero - Slide 2 */
-.vatu-hero-photo {
-    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 90%; height: 85%; object-fit: contain; opacity: 0.25; filter: sepia(0.2);
-    mask-image: linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-}
-
+/* REDUCED MOBILE FONT SIZES PER USER REQUEST */
 .vatu-hero-name, .venue-hero-name {
     font-family: 'Gidugu', serif;
-    font-size: 2.8rem;
+    font-size: 2.4rem; /* Reduced from 3.2rem */
     color: #8B4513; 
     margin: 1rem 0;
     border-bottom: 4px double var(--primary-color);
@@ -202,48 +149,54 @@ body {
     padding-bottom: 5px;
 }
 
-/* DATE HIGHLIGHT Card (RESTORED LITE FADE) */
-.date-highlight {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(184, 134, 11, 0.2);
-    padding: 2.5rem 1.5rem;
-    border-radius: 25px;
-    margin: 2rem 0;
+.ceremony-label { font-family: 'Gidugu', serif; font-size: 2.6rem; color: #8B4513; line-height: 1.2; }
+
+/* Photo Blending - Slide 2 */
+.vatu-hero-photo {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 90%; height: 85%; object-fit: contain; opacity: 0.25; filter: sepia(0.2);
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
 }
 
-.d-text { font-size: 2.2rem; font-weight: bold; color: #FF8B45; letter-spacing: 2px; }
-.t-text { font-size: 1.8rem; font-weight: 700; color: #8B4513; margin-top: 10px; }
+.date-highlight {
+    background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(5px); border: 1px solid rgba(184, 134, 11, 0.2);
+    padding: 2rem 1.2rem; border-radius: 20px; margin: 1.5rem 0;
+}
+
+.d-text { font-size: 1.8rem; font-weight: bold; color: #FF8B45; }
+.t-text { font-size: 1.6rem; font-weight: 700; color: #8B4513; }
 
 /* Flower Particles */
 .flower-vfx { position: fixed; inset: 0; pointer-events: none; z-index: 1000; overflow: hidden; }
 .petal {
-    position: absolute; width: 22px; height: 22px; border-radius: 11px 0 11px 0;
+    position: absolute; width: 20px; height: 20px; border-radius: 10px 0 10px 0;
     animation: petalFall 12s linear infinite; opacity: 0.6;
 }
 
 @keyframes petalFall {
     0% { transform: translateY(-10vh) rotate(0); opacity: 0; }
     10% { opacity: 0.8; }
-    100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
 }
 
-/* Sliding Animations */
-.fade-in {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-    transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+/* Dots */
+.story-dots {
+    position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 15px; z-index: 500;
 }
 
-.slide.active .fade-in { opacity: 1; transform: translateY(0) scale(1); }
-.slide.active .fade-in:nth-child(1) { transition-delay: 0.2s; }
-.slide.active .fade-in:nth-child(2) { transition-delay: 0.4s; }
+.story-dot { width: 4px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 50%; }
+.story-dot.active { border-radius: 10px; height: 30px; background: var(--primary-color); }
 
-/* Audio Controls */
-.audio-control {
-    position: fixed; top: 25px; right: 25px; z-index: 15000; /* Above doors after they hide */
-    background: white; width: 45px; height: 45px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.fade-in { opacity: 0; transform: translateY(40px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.slide.active .fade-in { opacity: 1; transform: translateY(0); }
+
+/* Venue Restored Style */
+.venue-header { font-size: 1.1rem; letter-spacing: 5px; color: var(--primary-color); font-weight: 800; margin-bottom: 1rem; }
+.direction-btn {
+    display: inline-block; margin: 1.5rem 0; padding: 12px 35px;
+    background: var(--gold-silk); border: 1px solid var(--primary-color);
+    color: var(--text-color); font-weight: 700; border-radius: 10px; text-decoration: none;
 }
 
 ::-webkit-scrollbar { display: none; }

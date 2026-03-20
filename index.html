@@ -16,15 +16,18 @@
 <body>
     <div class="app-container">
 
-        <!-- PRE-INTANCE DOOR ANIMATION -->
+        <!-- PRE-INTANCE GOLD DOOR ANIMATION -->
         <div id="introDoors" class="intro-doors">
             <div class="door door-left"></div>
             <div class="door door-right"></div>
-            <div class="door-content">
-                <div class="om-mandala">
-                    <img src="assets/ganesha.png" class="om-icon">
+            <div class="door-content circular-frame">
+                <!-- STATIC INNER WRAPPER FOR GANESHA -->
+                <div class="ganesha-container">
+                    <img src="assets/ganesha.png" class="static-ganesha">
                 </div>
-                <div class="tap-reveal-hint">TAP TO OPEN</div>
+                <!-- ROTATING OUTER DESIGN -->
+                <div class="rotating-mandala"></div>
+                <div class="door-tap-hint">TAP TO OPEN</div>
             </div>
         </div>
 
@@ -48,20 +51,20 @@
         <!-- Scrollable Story Flow -->
         <div class="story-container" id="storyWindow">
 
-            <!-- Slide 1: Welcome (Enhanced Titles) -->
+            <!-- Slide 1: Welcome -->
             <section class="slide" id="slide1">
                 <div class="content-frame">
                     <img src="assets/ganesha.png" width="80" class="fade-in">
                     <h1 class="telugu-main-title fade-in telugu-font">సామవేదం వారి ఆహ్వానం</h1>
-                    <!-- ENHANCED: Bolder, larger Telugu subtitle -->
-                    <div class="ceremony-headline fade-in telugu-font">ఉపనయన మహోత్సవము</div>
+                    <!-- Bolder, vibrant ceremony subtitle -->
+                    <div class="ceremony-label fade-in telugu-font">ఉపనయన మహోత్సవము</div>
                     <p class="fade-in subtitle-en">A Divine Journey of Initiation</p>
                 </div>
             </section>
 
-            <!-- Slide 2: THE STAR (Real Photo) -->
+            <!-- Slide 2: NAMES (THE STAR) -->
             <section class="slide" id="slide2">
-                <div class="parallax-wrapper">
+                <div class="parallax-bg-container">
                     <img src="assets/vatu_photo.png" alt="Sai Krishna" class="vatu-hero-photo">
                 </div>
                 <div class="content-frame overlay-text">
@@ -84,7 +87,7 @@
                         <p>స్వస్తిశ్రీ చాంద్రమానేన శ్రీ పరాభవ నామ సంవత్సర</p>
                         <p>చైత్ర భాహుళ షష్ఠి సోమవారం తేదీ</p>
                     </div>
-                    <!-- RESTORED LITE FADE BOX FROM USER REQUEST -->
+                    <!-- LITE FADE BOX FOR DATE -->
                     <div class="date-highlight fade-in">
                         <p class="d-text">APRIL 13, 2026</p>
                         <p class="t-text telugu-font">ఉదయం గం|| 11:20 ని||లకు</p>
@@ -96,7 +99,7 @@
                 </div>
             </section>
 
-            <!-- Slide 4: Venue -->
+            <!-- Slide 4: VENUE (STABLE PREMIUM STYLE) -->
             <section class="slide" id="slide4">
                 <div class="parallax-bg-container">
                     <img src="assets/family_homa.png" class="mobile-vatu-bg" style="opacity: 0.12;">
@@ -133,7 +136,7 @@
         <!-- Audio -->
         <audio id="bgMusic" src="assets/music.mp3" loop preload="auto"></audio>
 
-        <!-- Dots Tracking -->
+        <!-- Dots -->
         <div class="story-dots">
             <span class="story-dot active"></span>
             <span class="story-dot"></span>
