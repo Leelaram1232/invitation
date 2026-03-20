@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const introDoors = document.getElementById('introDoors');
     const landingPage = document.getElementById('landingPage');
     const openBtn = document.getElementById('openInvitation');
     const slides = document.querySelectorAll('.slide');
@@ -8,22 +9,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const bgMusic = document.getElementById('bgMusic');
     let isMuted = false;
 
-    // Handle Opening
+    // Phase 1: OPEN DOORS
+    const handleDoorOpen = () => {
+        if (introDoors.classList.contains('opened')) return;
+        introDoors.classList.add('opened');
+        
+        // OPTIONAL: Start music on first tap to be more immersive
+        if (bgMusic && bgMusic.paused) {
+            bgMusic.play().catch(e => console.error("Audio block:", e));
+        }
+
+        // Remove doors from DOM after animation
+        setTimeout(() => {
+            introDoors.classList.add('hidden');
+        }, 1500);
+    };
+
+    introDoors.addEventListener('click', handleDoorOpen);
+    introDoors.addEventListener('touchstart', (e) => {
+        handleDoorOpen();
+        e.preventDefault();
+    }, {passive: false});
+
+    // Phase 2: OPEN INVITATION (Landing to Reel)
     const handleOpen = () => {
         landingPage.classList.add('hidden');
         if (slides[0]) slides[0].classList.add('active');
         
-        // Start Local Music on Open
-        if (bgMusic) {
+        // Ensure music is playing
+        if (bgMusic && bgMusic.paused) {
             bgMusic.play().catch(e => console.error("Audio error:", e));
-            audioToggle.querySelector('.music-icon').textContent = '🔊';
         }
+        audioToggle.querySelector('.music-icon').textContent = '🔊';
     };
 
     if (openBtn) openBtn.addEventListener('click', handleOpen);
     landingPage.addEventListener('touchstart', handleOpen, {passive: true});
 
-    // Mute/Unmute Toggle
+    // Audio & Particles
     audioToggle.addEventListener('click', () => {
         if (!bgMusic) return;
         isMuted = !isMuted;
@@ -31,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
         audioToggle.querySelector('.music-icon').textContent = isMuted ? '🔇' : '🔊';
     });
 
-    // Slides Intersection Observer
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -43,19 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.6 });
     slides.forEach(slide => observer.observe(slide));
 
-    // Flower Particles
     function createPetal() {
         if (!flowerLayer) return;
         const petal = document.createElement('div');
         petal.classList.add('petal');
         const isGold = Math.random() > 0.7;
-        petal.style.width = Math.random() * 15 + 10 + 'px';
-        petal.style.height = petal.style.width;
         petal.style.left = Math.random() * 100 + 'vw';
         petal.style.animationDuration = Math.random() * 6 + 4 + 's';
-        petal.style.opacity = Math.random() * 0.6 + 0.3;
         petal.style.backgroundColor = isGold ? '#FFD700' : '#FFC0CB';
-        petal.style.borderRadius = '20px 0 20px 0';
         flowerLayer.appendChild(petal);
         setTimeout(() => petal.remove(), 10000);
     }

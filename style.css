@@ -3,7 +3,8 @@
     --accent-color: #FF8BA7; /* Rose Pink accents */
     --text-color: #5C4033; /* Dark Coffee */
     --bg-cream: #FFFAF0; /* Floral Cream */
-    --gold-silk: linear-gradient(135deg, #FFF9E9 0%, #FFFDF0 100%); /* Lite Fade */
+    --gold-silk: linear-gradient(135deg, #FFF9E9 0%, #FFFDF0 100%);
+    --gold-door: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
 }
 
 * {
@@ -36,7 +37,81 @@ body {
     overflow: hidden;
 }
 
-/* Landing Overlay */
+/* GOLD DOOR INTRO ANIMATION */
+.intro-doors {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.door {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: var(--gold-door);
+    transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.door-left { left: 0; border-right: 1px solid rgba(255,255,255,0.3); }
+.door-right { right: 0; border-left: 1px solid rgba(255,255,255,0.3); }
+
+.door-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    transition: opacity 1s ease;
+}
+
+.om-mandala {
+    width: 200px;
+    height: 200px;
+    background: url('assets/mandala.png') center/contain no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: rotateDoorMandala 20s linear infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+}
+
+@keyframes rotateDoorMandala {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.om-icon {
+    width: 80px;
+    transform: rotate(0); /* Counter-rotate to stay upright if needed */
+}
+
+.tap-reveal-hint {
+    margin-top: 2rem;
+    color: #4B3621;
+    font-weight: bold;
+    letter-spacing: 5px;
+    font-size: 0.9rem;
+    animation: pulseHint 1.5s infinite;
+}
+
+@keyframes pulseHint {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+/* Door Animation States */
+.intro-doors.opened .door-left { transform: translateX(-100%); }
+.intro-doors.opened .door-right { transform: translateX(100%); }
+.intro-doors.opened .door-content { opacity: 0; pointer-events: none; }
+.intro-doors.hidden { display: none; }
+
+/* Landing Overlay Styles */
 .landing-overlay {
     position: fixed;
     inset: 0;
@@ -71,12 +146,6 @@ body {
     border-radius: 40px;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
-    animation: pulseBtn 2s infinite;
-}
-
-@keyframes pulseBtn {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
 }
 
 /* Stories & Slides */
@@ -111,27 +180,12 @@ body {
     z-index: 50;
 }
 
-.content-frame {
-    z-index: 10;
-    width: 100%;
-    text-align: center;
-}
+.content-frame { z-index: 10; width: 100%; text-align: center; }
 
-.telugu-main-title {
-    font-size: 2.5rem;
-    font-family: 'Gidugu', serif;
-    color: #B8860B;
-}
-
-.ceremony-label {
-    font-family: 'Gidugu', serif;
-    font-size: 3rem;
-    color: #8B4513; 
-    line-height: 1.2;
-}
+.telugu-main-title { font-size: 2.5rem; font-family: 'Gidugu', serif; color: #B8860B; }
+.ceremony-label { font-family: 'Gidugu', serif; font-size: 3rem; color: #8B4513; line-height: 1.2; }
 
 /* Portrait Hero - Slide 2 */
-.parallax-bg-container { position: absolute; inset: 0; z-index: 1; }
 .vatu-hero-photo {
     position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
     width: 90%; height: 85%; object-fit: contain; opacity: 0.25; filter: sepia(0.2);
@@ -148,15 +202,14 @@ body {
     padding-bottom: 5px;
 }
 
-/* RESTORED LITE FADE BOX FOR DATE */
+/* DATE HIGHLIGHT Card (RESTORED LITE FADE) */
 .date-highlight {
-    background: rgba(255, 255, 255, 0.6); /* Lite White Fade */
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(184, 134, 11, 0.2);
     padding: 2.5rem 1.5rem;
     border-radius: 25px;
     margin: 2rem 0;
-    box-shadow: 0 8px 32px rgba(184, 134, 11, 0.05);
 }
 
 .d-text { font-size: 2.2rem; font-weight: bold; color: #FF8B45; letter-spacing: 2px; }
@@ -175,45 +228,22 @@ body {
     100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
 }
 
-/* SLIDING ANIMATIONS ENHANCEMENT */
+/* Sliding Animations */
 .fade-in {
     opacity: 0;
     transform: translateY(40px) scale(0.95);
     transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform, opacity;
 }
 
-.slide.active .fade-in {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-/* Staggered Content Animation */
+.slide.active .fade-in { opacity: 1; transform: translateY(0) scale(1); }
 .slide.active .fade-in:nth-child(1) { transition-delay: 0.2s; }
 .slide.active .fade-in:nth-child(2) { transition-delay: 0.4s; }
-.slide.active .fade-in:nth-child(3) { transition-delay: 0.6s; }
-.slide.active .fade-in:nth-child(4) { transition-delay: 0.8s; }
 
-/* Dots */
-.story-dots {
-    position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
-    display: flex; flex-direction: column; gap: 15px; z-index: 500;
-}
-
-.story-dot { width: 4px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 50%; }
-.story-dot.active { border-radius: 10px; height: 30px; background: var(--primary-color); }
-
-/* Audio & Buttons */
+/* Audio Controls */
 .audio-control {
-    position: fixed; top: 25px; right: 25px; z-index: 5000;
+    position: fixed; top: 25px; right: 25px; z-index: 15000; /* Above doors after they hide */
     background: white; width: 45px; height: 45px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.direction-btn {
-    display: inline-block; margin: 1.5rem 0; padding: 12px 35px;
-    background: var(--gold-silk); border: 1px solid var(--primary-color);
-    color: var(--text-color); font-weight: 700; border-radius: 10px; text-decoration: none;
 }
 
 ::-webkit-scrollbar { display: none; }
