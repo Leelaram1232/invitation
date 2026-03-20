@@ -51,10 +51,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // Auto Flip System
+    let autoFlipTimer = null;
+    const startAutoFlip = () => {
+        if (autoFlipTimer) clearInterval(autoFlipTimer);
+        autoFlipTimer = setInterval(() => {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlides();
+            } else {
+                stopAutoFlip(); // Stop at last page
+            }
+        }, 3500); // 3.5 seconds interval
+    };
+
+    const stopAutoFlip = () => {
+        if (autoFlipTimer) clearInterval(autoFlipTimer);
+        autoFlipTimer = null;
+    };
+
+    const resetAutoFlip = () => {
+        stopAutoFlip();
+        // Only restart if not at the end
+        if (currentSlide < totalSlides - 1) {
+            startAutoFlip();
+        }
+    };
+
     const handleOpen = () => {
         if (!landingPage) return;
         landingPage.classList.add('hidden');
         updateSlides();
+        startAutoFlip(); // Begin auto-advance on open
         
         // Second attempt to ensure audio is playing
         if (bgMusic && bgMusic.paused) {
@@ -84,9 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (direction === 'next' && currentSlide < totalSlides - 1) {
             currentSlide++;
             updateSlides();
+            resetAutoFlip();
         } else if (direction === 'prev' && currentSlide > 0) {
             currentSlide--;
             updateSlides();
+            resetAutoFlip();
         }
     };
 
@@ -128,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation(); // Prevent trigger storyWindow click
             currentSlide = index;
             updateSlides();
+            resetAutoFlip();
         });
     });
 
