@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const landingPage = document.getElementById('landingPage');
     const openBtn = document.getElementById('openInvitation');
-    const container = document.getElementById('storyWindow');
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.story-dot');
     const flowerLayer = document.getElementById('flowerLayer');
@@ -9,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bgMusic = document.getElementById('bgMusic');
     let isMuted = false;
 
-    // Opening Control
+    // Handle Opening
     const handleOpen = () => {
         landingPage.classList.add('hidden');
         if (slides[0]) slides[0].classList.add('active');
@@ -32,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audioToggle.querySelector('.music-icon').textContent = isMuted ? '🔇' : '🔊';
     });
 
-    // Story Tracking
+    // Slides Intersection Observer
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -44,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.6 });
     slides.forEach(slide => observer.observe(slide));
 
-    // Flower VFX Generator
+    // Flower Particles
     function createPetal() {
         if (!flowerLayer) return;
         const petal = document.createElement('div');
