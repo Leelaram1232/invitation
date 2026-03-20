@@ -1,9 +1,9 @@
 :root {
     --primary-color: #B8860B; /* Deep Gold */
     --accent-color: #FF8BA7; /* Rose Pink accents */
-    --text-color: #4B3621; /* Dark Coffee */
+    --text-color: #2C1E14; /* Maximum Contrast Dark Coffee */
     --bg-cream: #FFFAF0; /* Floral Cream */
-    --gold-silk: linear-gradient(135deg, #FFDF91 0%, #FFF9E9 100%);
+    --gold-silk: linear-gradient(180deg, #D4AF37 0%, #B8860B 100%);
     --card-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
@@ -23,12 +23,14 @@ body {
     width: 100vw;
 }
 
+/* MAXIMUM TELUGU ENHANCEMENT */
 .telugu-font, .telugu-title, .telugu-main-title, .ceremony-headline, .vatu-hero-name, .venue-hero-name, .traditional-text p, .host-name, .welcomers-list p {
-    font-family: 'Mandali', sans-serif;
+    font-family: 'Hind Guntur', 'Mandali', sans-serif; /* Switched to Hind Guntur for better weight range */
     line-height: 1.8;
-    letter-spacing: 1px;
-    font-weight: 600;
-    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.1);
+    letter-spacing: 1.5px; /* More breathable */
+    font-weight: 700; /* FORCE BOLD for all */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Crisp character separation */
+    -webkit-font-smoothing: antialiased;
 }
 
 .app-container {
@@ -65,7 +67,7 @@ body {
 }
 
 .open-btn {
-    padding: 16px 50px;
+    padding: 18px 55px;
     background: linear-gradient(135deg, #D4AF37, #B8860B);
     color: white;
     font-weight: 700;
@@ -75,7 +77,7 @@ body {
     box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
 }
 
-/* Stories & Slides */
+/* Slide Styles */
 .story-container {
     height: 100dvh;
     width: 100vw;
@@ -98,11 +100,12 @@ body {
     padding: 2.5rem;
 }
 
+/* Slide Deco Frame */
 .slide::after {
     content: '';
     position: absolute;
     inset: 20px;
-    border: 1px solid rgba(184, 134, 11, 0.1);
+    border: 1px solid rgba(184, 134, 11, 0.15);
     pointer-events: none;
     z-index: 50;
 }
@@ -113,59 +116,59 @@ body {
     text-align: center;
 }
 
+/* Slide 1 - Maximum Visibility Title */
 .telugu-main-title {
-    font-size: 2.8rem;
+    font-size: 3.2rem;
     font-family: 'Gidugu', serif;
-    color: #B8860B;
+    background: var(--gold-silk);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
 }
 
 .ceremony-headline {
     font-family: 'Gidugu', serif;
-    font-size: 3.5rem;
-    font-weight: 800;
+    font-size: 4rem;
+    font-weight: 900;
     color: #8B4513; 
     line-height: 1.1;
     margin: 1.5rem 0;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.15);
 }
 
-/* Slide 2 & 4 - Unified Premium Background */
-.parallax-wrapper, .parallax-bg-container { position: absolute; inset: 0; z-index: 1; }
-
-.vatu-hero-photo, .vatu-hero-bg-img {
-    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 90%; height: 90%; object-fit: contain; opacity: 0.25; filter: sepia(0.2);
-    mask-image: linear-gradient(to top, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
-    animation: zoomReveal 2s ease-out;
-}
-
+/* Slide 2 & 4 - Premium Name/Venue Underline */
 .vatu-hero-name, .venue-hero-name {
     font-family: 'Gidugu', serif;
-    font-size: 3.2rem;
+    font-size: 3.5rem;
     color: #8B4513; 
     margin: 1.5rem 0;
-    border-bottom: 4px double var(--primary-color);
+    border-bottom: 5px double var(--primary-color);
     display: inline-block;
     padding-bottom: 10px;
+    background: linear-gradient(to right, #8B4513, #B8860B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.host-name, .welcomers-list p { font-size: 1.2rem; color: #5C4033; margin-bottom: 0.3rem; }
+/* Improved Host Visibility on small screens */
+.host-name, .welcomers-list p { font-size: 1.3rem; color: #2C1E14; margin-bottom: 0.5rem; }
 
 .date-hero-card {
     background: var(--gold-silk);
-    padding: 2rem 1rem;
+    padding: 2rem 1.5rem;
     border-radius: 20px;
-    box-shadow: var(--card-shadow);
-    margin: 2rem 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin: 2.5rem 0;
 }
 
-.d-text { font-size: 2.2rem; font-weight: bold; color: #FF8B45; }
-.t-text { font-size: 1.8rem; font-weight: 700; color: #8B4513; }
+.d-text { font-size: 2.5rem; font-weight: bold; color: #FF8B45; letter-spacing: 2px; }
+.t-text { font-size: 2rem; font-weight: 800; color: #8B4513; margin-top: 10px; }
 
-/* Flower Particles (FIXED ANIMATION) */
+/* Flower Particles */
 .flower-vfx { position: fixed; inset: 0; pointer-events: none; z-index: 1000; overflow: hidden; }
 .petal {
     position: absolute; width: 20px; height: 20px; border-radius: 10px 0 10px 0;
-    animation: petalFall 10s linear infinite; opacity: 0.6;
+    animation: petalFall 12s linear infinite; opacity: 0.6;
 }
 
 @keyframes petalFall {
@@ -174,29 +177,30 @@ body {
     100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
 }
 
-/* Dots */
+/* Dots Tracking */
 .story-dots {
     position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
     display: flex; flex-direction: column; gap: 15px; z-index: 500;
 }
 
-.story-dot { width: 4px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 50%; }
-.story-dot.active { border-radius: 10px; height: 30px; background: var(--primary-color); }
+.story-dot { width: 5px; height: 5px; background: rgba(0,0,0,0.1); border-radius: 50%; }
+.story-dot.active { border-radius: 10px; height: 35px; background: var(--primary-color); }
 
 .fade-in { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
 .slide.active .fade-in { opacity: 1; transform: translateY(0); }
 
-/* Venue & Directions */
-.venue-header { font-size: 1.2rem; letter-spacing: 5px; color: var(--primary-color); font-weight: 800; margin-bottom: 1rem; }
-.direction-btn {
-    display: inline-block; margin: 1.5rem 0; padding: 12px 35px;
-    background: var(--gold-silk); border: 2px solid var(--primary-color);
-    color: var(--text-color); font-weight: 800; border-radius: 12px; text-decoration: none;
+/* Vatu Photo Display */
+.vatu-hero-photo {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 90%; height: 90%; object-fit: contain; opacity: 0.28; filter: sepia(0.2);
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+    animation: zoomReveal 2s ease-out;
+    z-index: 1;
 }
 
 @keyframes zoomReveal {
     from { transform: scale(0.9) translateX(-50%); opacity: 0; }
-    to { transform: scale(1) translateX(-50%); opacity: 0.25; }
+    to { transform: scale(1) translateX(-50%); opacity: 0.28; }
 }
 
 .audio-control {
