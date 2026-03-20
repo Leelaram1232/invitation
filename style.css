@@ -1,7 +1,7 @@
 :root {
     --primary-color: #B8860B; /* Deep Gold */
     --accent-color: #FF8BA7; /* Rose Pink accents */
-    --text-color: #5C4033; /* Dark Coffee */
+    --text-color: #4B3621; /* Rich Dark Coffee for visibility */
     --bg-cream: #FFFAF0; /* Floral Cream */
     --gold-silk: linear-gradient(135deg, #FFF9E9 0%, #FFFDF0 100%);
     --gold-door: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
@@ -23,19 +23,20 @@ body {
     width: 100vw;
 }
 
-.telugu-font, .telugu-title, .telugu-main-title, .ceremony-label, .vatu-hero-name, .venue-hero-name, .traditional-text p {
+/* HIGH-VISIBILITY TELUGU ENHANCEMENTS */
+.telugu-font, .telugu-title, .telugu-main-title, .ceremony-label, .vatu-hero-name, .venue-hero-name, .traditional-text p, .host-name, .welcomers-list p {
     font-family: 'Mandali', sans-serif;
-    line-height: 2;
+    line-height: 1.8;
     letter-spacing: 0.8px;
-    font-weight: 400;
+    font-weight: 700; /* Bolder as requested */
+    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.1); /* Subtle shadow for POP */
 }
 
-/* APP CONTAINER */
 .app-container {
     height: 100dvh; width: 100vw; position: relative; overflow: hidden;
 }
 
-/* GOLD DOOR CIRCULAR INTRO */
+/* Door Animation */
 .intro-doors {
     position: fixed; inset: 0; z-index: 10000;
     display: flex; justify-content: center; align-items: center; cursor: pointer;
@@ -44,52 +45,29 @@ body {
 .intro-doors.hidden { display: none !important; pointer-events: none !important; }
 
 .door {
-    position: absolute; top: 0; width: 50%; height: 100%;
-    background: var(--gold-door);
-    transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
-    z-index: 1;
+    position: absolute; top: 0; width: 50%; height: 100%; background: var(--gold-door);
+    transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1); z-index: 1;
 }
 
 .door-left { left: 0; border-right: 1px solid rgba(255,255,255,0.2); }
 .door-right { right: 0; border-left: 1px solid rgba(255,255,255,0.2); }
 
-.door-content {
-    position: relative; z-index: 10; text-align: center;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-}
-
 .rotating-mandala {
-    position: absolute;
-    width: 320px; height: 320px;
-    background: url('assets/mandala.png') center/contain no-repeat;
-    opacity: 0.6;
-    animation: rotateOuter 30s linear infinite;
-    z-index: 2; border-radius: 50%;
+    position: absolute; width: 340px; height: 340px; background: url('assets/mandala.png') center/contain no-repeat;
+    opacity: 0.6; animation: rotateOuter 30s linear infinite; z-index: 2; border-radius: 50%;
 }
 
 .ganesha-container {
-    position: relative; width: 140px; height: 140px;
-    background: white; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 30px rgba(0,0,0,0.15);
-    z-index: 10; border: 3px solid var(--primary-color); overflow: hidden;
+    position: relative; width: 140px; height: 140px; background: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(0,0,0,0.15);
+    z-index: 10; border: 3px solid var(--primary-color);
 }
 
-.static-ganesha { width: 85px; z-index: 12; display: block; }
-
-.door-tap-hint {
-    position: absolute; bottom: -120px;
-    color: #4B3621; font-weight: bold; letter-spacing: 6px; font-size: 0.8rem;
-    animation: pulseLabel 1.5s infinite;
-}
+.static-ganesha { width: 85px; z-index: 12; }
 
 @keyframes rotateOuter { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes pulseLabel { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-.intro-doors.opened .door-left { transform: translateX(-100%); }
-.intro-doors.opened .door-right { transform: translateX(100%); }
-
-/* Landing Overlay */
+/* Landing Screen */
 .landing-overlay {
     position: fixed; inset: 0; background: radial-gradient(circle at center, #FFFDF0 0%, #FFF9E9 100%); z-index: 5000;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -98,9 +76,7 @@ body {
 
 .landing-overlay.hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; visibility: hidden; }
 
-.landing-ganesha {
-    width: 120px; margin-bottom: 2rem; animation: floatGanesha 4s ease-in-out infinite;
-}
+.landing-ganesha { width: 120px; margin-bottom: 2rem; animation: floatGanesha 4s ease-in-out infinite; }
 
 @keyframes floatGanesha { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
@@ -109,7 +85,7 @@ body {
     font-weight: 700; border: none; border-radius: 40px; cursor: pointer;
 }
 
-/* Stories & Slides */
+/* Slides System */
 .story-container {
     height: 100dvh; width: 100vw; overflow-y: scroll; scroll-snap-type: y mandatory;
     scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
@@ -124,51 +100,47 @@ body {
 
 .content-frame { z-index: 100; width: 100%; text-align: center; padding: 2rem; position: relative; }
 
-/* SLIDE 2 - BOY'S FACE VISIBILITY ENHANCEMENT */
-.vatu-hero-photo {
-    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 90%; height: 80%; object-fit: contain;
-    opacity: 0.45; /* Increased visibility as requested */
-    mask-image: linear-gradient(to top, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%); /* Keeps face clear */
-    z-index: 5;
-    animation: zoomReveal 2s ease-out;
-}
-
+/* FONT SIZE ENHANCEMENTS */
 .vatu-hero-name, .venue-hero-name {
     font-family: 'Gidugu', serif;
-    font-size: 2.1rem;
+    font-size: 2.6rem; /* Increased slightly */
     color: #8B4513; margin: 0.8rem 0;
     border-bottom: 3px double var(--primary-color);
     display: inline-block; padding-bottom: 5px;
 }
 
-/* SLIDE 5: WELL WISHERS PREMIUM HEADING */
-.wishes-title {
-    font-family: 'Gidugu', serif;
-    font-size: 2.2rem;
-    color: #B8860B;
-    margin-bottom: 2rem;
+.venue-hero-name { font-size: 2.1rem; }
+
+.ceremony-label { font-family: 'Gidugu', serif; font-size: 2.6rem; color: #8B4513; line-height: 1.2; }
+.telugu-main-title { font-size: 2.4rem; font-family: 'Gidugu', serif; color: #B8860B; }
+
+.host-name, .welcomers-list p { font-size: 1.3rem; margin-bottom: 0.5rem; }
+
+/* Photo Blending Stability */
+.vatu-hero-photo {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 90%; height: 80%; object-fit: contain; opacity: 0.45; filter: sepia(0.2);
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+    z-index: 5;
 }
 
-.wishes-title .en-tag {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    vertical-align: middle;
+/* SLIDE 4 NEW BACKGROUND */
+.family-homa-bg {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 100%; height: 100%; object-fit: contain; opacity: 0.18; z-index: 1;
 }
 
 .date-highlight {
-    background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(5px); border: 1px solid rgba(184, 134, 11, 0.1);
-    padding: 2rem 1rem; border-radius: 20px; margin: 1.5rem 0;
+    background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(5px); border: 1px solid rgba(184, 134, 11, 0.1);
+    padding: 2.2rem 1.2rem; border-radius: 20px; margin: 1.5rem 0;
 }
 
-.d-text { font-size: 1.8rem; font-weight: bold; color: #FF8B45; }
+.d-text { font-size: 2rem; font-weight: bold; color: #FF8B45; }
 
 /* Flower Particles */
 .flower-vfx { position: fixed; inset: 0; pointer-events: none; z-index: 1000; overflow: hidden; }
 .petal {
-    position: absolute; width: 16px; height: 16px; border-radius: 8px 0 8px 0;
+    position: absolute; width: 14px; height: 14px; border-radius: 7px 0 7px 0;
     animation: petalFall 12s linear infinite; opacity: 0.6;
 }
 
@@ -188,11 +160,6 @@ body {
 
 .fade-in { opacity: 0; transform: translateY(30px); transition: 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
 .slide.active .fade-in { opacity: 1; transform: translateY(0); }
-
-@keyframes zoomReveal {
-    from { transform: scale(0.9) translateX(-50%); opacity: 0; }
-    to { transform: scale(1) translateX(-50%); opacity: 0.45; }
-}
 
 .direction-btn {
     display: inline-block; margin: 1.2rem 0; padding: 10px 30px;
