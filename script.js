@@ -28,6 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (introDoors) {
         introDoors.addEventListener('click', handleDoorOpen);
         introDoors.addEventListener('touchstart', handleDoorOpen, {passive: true});
+
+        // Auto-open doors after 3 seconds if not tapped
+        setTimeout(() => {
+            handleDoorOpen();
+            // After doors open, auto-open the invitation after a brief delay
+            setTimeout(() => {
+                handleOpen();
+            }, 1800);
+        }, 3000);
     }
 
     // Phase 2: Open Stories (Landing to Reel)
